@@ -17,4 +17,24 @@ $routes = [
         'controller' => 'helloWorld',
         'action' => 'world'
     ],
+    '/login' =>
+    [
+        'controller' => 'index',
+        'action' => 'login'
+    ],
+    '/registr' =>
+    [
+        'controller' => 'index',
+        'action' => 'registr'
+    ],
+    '/addInfo/Form' =>
+    [
+        'controller' => 'index',
+        'action' => 'addInfo'
+    ],
+    '/add' =>
+    [
+        'controller' => 'index',
+        'action' => 'add'
+    ],
 ];

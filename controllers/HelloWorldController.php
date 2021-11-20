@@ -35,6 +35,7 @@ class HelloWorldController
     }
 
 
+
     protected function render($templateName, $vars = [])
     {
         ob_start();
