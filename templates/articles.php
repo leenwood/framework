@@ -17,6 +17,6 @@
         <td><a href="/show?id=<?php echo $article['id'] ?>"><?php echo $article['name']?></a></td>
     </tr>
 <?php endforeach; ?>
-
+    <a href="/show?id=test">testtt</a>
 </body>
 </html>

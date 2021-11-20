@@ -31,4 +31,24 @@ class ArticleRepository
 
         return $statement->fetch();
     }
+
+    /**
+     * Добавление информации о счетчике.
+     * @param $name
+     * @param $body
+     */
+    public function add($name, $body)
+    {
+        $statement = $this->connection->prepare("INSERT INTO counters (id, idCount, curValue, prevValue) ");
+    }
+
+    /**
+     * @param $idCount - ИД счетчика у которого нужно найти прошлое значение
+     * @return Возращается значение преведущего значения у счетчика.
+     */
+    public function takePrevValue($idCount)
+    {
+        $statement = $this->connection->prepare("SELECT currValue FROM indication");
+        return $statement->fetch();
+    }
 }
