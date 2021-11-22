@@ -2,6 +2,7 @@
 
 /**
  * Http Request class
+ * Возращает значения POST, GET, COOKIE
  */
 class Request
 {

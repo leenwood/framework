@@ -22,6 +22,11 @@ $routes = [
         'controller' => 'index',
         'action' => 'login'
     ],
+    '/authorization' =>
+    [
+        'controller' => 'index',
+        'action' => 'auth'
+    ],
     '/registr' =>
     [
         'controller' => 'index',

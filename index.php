@@ -26,7 +26,7 @@ $connection = new PDO( $dsn, $database['username'], $database['password'],
     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
 $articleRepository = new ArticleRepository($connection);
-
+$user = new userData($connection);
 
 try {
     $route = $router->match($request->getPath());
@@ -49,7 +49,7 @@ $controllers = [
 //        'action' => 'login'
 //    ];
 //}
-$user = new userData($pAccount, $password, $connection);
+
 
 $controller = $controllers[$route['controller']];
 $actionMethod = $route['action'] . 'Action';
@@ -77,4 +77,4 @@ $response->send();
 /* commit
 -ver 0.01. Create form add/login/regist
 Add sql querry database/tabels
-Add controller func + add path in routers
+Add controller func + add path in routers */

@@ -7,9 +7,11 @@ class userData
      * @var string
      */
     protected $countersID= [];
+    protected $connection = null;
 
-    public function __construct($pAccount, $password, $connection)
+    public function __construct(PDO $connection)
     {
+        $this->connection = $connection;
         /* обращение в бд за получением информации о пользователе.
         1. Запись в idCount, информацию о всех счетчиках привязанных на пользователя в порядке.
         ГВС
@@ -40,4 +42,16 @@ class userData
         return $ansFromBD;
     }
 
+    public function authBool($pAccaount, $password)
+    {
+        $statement = $this->connection->query("SELECT password FROM users WHERE uid = $pAccaount");
+        if($statement === $password)
+        {
+            return True;
+        }
+        else
+        {
+            return False;
+        }
+    }
 }

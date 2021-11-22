@@ -7,10 +7,10 @@
 </head>
 <body>
 <div class="authorization_div_main">
-    <form action="" method="POST">
+    <form action="/authorization" method="POST">
         <label>Log in</label>
-        <input type="text" name="login" class="authorization_input form-control" placeholder="Login"><br>
-        <input type="password" name="password" class="authorization_input form-control" placeholder="Password"><br>
+        <input type="text" name="login" class="authorization_input form-control" placeholder="Персональный счет"><br>
+        <input type="password" name="password" class="authorization_input form-control" placeholder="Пароль"><br>
         <button class="btn btn-success" type="submit">Sign in</button>
         <button formaction="registr" class="btn btn_border">Sign up</button>
     </form>
@@ -18,5 +18,5 @@
 </body>
 </html>
 
-
-<?php
+<!--  INSERT INTO `users` (`uid`, `lastname`, `surname`, `password`, `homeSqueare`) VALUES (NULL, 'Ershov', 'George', '123321', '10.23');  -->
+<?php ?>
