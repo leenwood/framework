@@ -3,8 +3,8 @@
 class userData
 {
     /**
-     * Список счетчиков. С их ИД
-     * @var array|int[] $counterID
+     * Action name
+     * @var string
      */
     protected $countersID= [];
 
@@ -25,14 +25,6 @@ class userData
         ];
     }
 
-    /**
-     * Получить информацию о счетчиках по порядку.
-     * GVS
-     * HVS
-     * ELE
-     * @return int[]
-     */
-
     public function getCounterId()
     {
         return $this->countersID = [
@@ -41,22 +33,6 @@ class userData
             "ELE" => -1,
         ];
     }
-
-    /**
-     * Проверяет авторизован ли пользователь по тем данным что он ввел
-     * Возращает true/false
-     * @return bool True/False
-     */
-    public function auth()
-    {
-        return false;
-    }
-
-    /**
-     * Проверяет в бд, счетчик по типу и привязанного к аккаунту.
-     * Возращает idCount
-     * @return int $idCount
-     */
 
     protected function checkCounter($type)
     {
