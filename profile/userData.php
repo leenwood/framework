@@ -42,10 +42,12 @@ class userData
         return $ansFromBD;
     }
 
-    public function authBool($pAccaount, $password)
+    public function authBool($pAccount, $password)
     {
-        $statement = $this->connection->query("SELECT password FROM users WHERE uid = $pAccaount");
-        if($statement === $password)
+        $sqlTmp = 'SELECT password FROM users WHERE uid=' . $pAccount . ';';
+        $statement = $this->connection->prepare($sqlTmp);
+
+        if($statement == $password)
         {
             return True;
         }

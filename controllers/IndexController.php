@@ -57,24 +57,15 @@ class IndexController
     /**
      * Возращает значение страницы аунтефекации.
     **/
-    public function authAction(Request $request) {
-        $pAccount = $_POST['login'];
-        $password = $_POST['password'];
-        if(authBool($pAccount, $password))
-        {
-            setcookie('pAccaount', $pAccount, 0 , '/');
-            setcookie('password', $password, 0 , '/');
-            return new Response(
-                $this->render('main', [
-                'title' => 'main page',
-                'text' => ''
-            ]));
-        }
-        return new Response(
-            $this->render('auth/registr', [
-                'title' => 'registr page',
-                'text' => ''
-            ]));
+    public function authAction(Request $request)
+    {
+
+        $pAccount = sprintf("%s", $_POST['login']);
+        $password = sprintf("%s", $_POST['password']);
+
+        setcookie('pAccount', $pAccount);
+        setcookie('password', $password);
+        return new Response('/', '301', 'homePage');
     }
 
     public function registrAction(Request $request) {

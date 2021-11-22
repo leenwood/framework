@@ -36,3 +36,5 @@ REFERENCES counters(idCount);
 ALTER TABLE counters add CONSTRAINT newStyleCodeRakaMakaFo_FK
     FOREIGN KEY counters(pAccount)
     REFERENCES users(uid);
+
+INSERT INTO `users` (`uid`, `lastname`, `surname`, `password`, `homeSqueare`) VALUES (NULL, 'George', 'Ershov', '123', '8.32');

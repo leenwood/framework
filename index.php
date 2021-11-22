@@ -14,12 +14,13 @@ include_once 'config/routes.php';
 include_once 'config/database.php';
 
 
+/** @var Response $routes */
 $router = new Router($routes);
 $request = Request::createFromGlobals();
 
 
 
-
+/** @var Response $database */
 $dsn = sprintf("mysql:host=%s;dbname=%s;charset=%s", $database['database_host'], $database['database_name'],  $database['charset']);
 /** @var PDO $connection */
 $connection = new PDO( $dsn, $database['username'], $database['password'],
@@ -37,19 +38,19 @@ try {
     ];
 }
 
+if($user->authBool(1, 123))
+{
+    setcookie("BOOL", "True");
+}
+else
+{
+    setcookie("BOOL", "False");
+}
+
 $controllers = [
     'index' => new IndexController($articleRepository),
     'helloWorld' => new HelloWorldController(),
 ];
-
-//if (empty($pAccount) || empty($password))
-//{
-//    $route = [
-//        'controller' => 'index',
-//        'action' => 'login'
-//    ];
-//}
-
 
 $controller = $controllers[$route['controller']];
 $actionMethod = $route['action'] . 'Action';

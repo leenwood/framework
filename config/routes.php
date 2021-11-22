@@ -22,7 +22,7 @@ $routes = [
         'controller' => 'index',
         'action' => 'login'
     ],
-    '/authorization' =>
+    '/auth' =>
     [
         'controller' => 'index',
         'action' => 'auth'

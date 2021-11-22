@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="authorization_div_main">
-    <form action="/authorization" method="POST">
+    <form action="/auth" method="POST">
         <label>Log in</label>
         <input type="text" name="login" class="authorization_input form-control" placeholder="Персональный счет"><br>
         <input type="password" name="password" class="authorization_input form-control" placeholder="Пароль"><br>
