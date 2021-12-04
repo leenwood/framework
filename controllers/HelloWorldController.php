@@ -1,6 +1,6 @@
 <?php
 
-class HelloWorldController
+class HelloWorldController extends BaseController
 {
     /**
      * Action name

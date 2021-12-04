@@ -1,14 +1,17 @@
 <?php
-require_once 'controllers/IndexController.php';
-require_once 'controllers/HelloWorldController.php';
+
 
 require_once 'core/Request.php';
 require_once 'core/Response.php';
 require_once 'core/Router.php';
+require_once 'core/BaseController.php';
 
 require_once 'profile/userData.php';
 
 require_once 'repositories/ArticleRepository.php';
+
+require_once 'controllers/IndexController.php';
+require_once 'controllers/HelloWorldController.php';
 
 include_once 'config/routes.php';
 include_once 'config/database.php';
@@ -38,13 +41,24 @@ try {
     ];
 }
 
-if($user->authBool(1, 123))
+
+if($route['action'] == 'login' or $route['action'] == 'auth' or $route['action'] == 'registr')
 {
-    setcookie("BOOL", "True");
-}
-else
+    setcookie("root", "true");
+} else
 {
-    setcookie("BOOL", "False");
+    if($user->authBool($_COOKIE['pAccount'], $_COOKIE['password']))
+    {
+        var_dump($user->authBool($_COOKIE['pAccount'], $_COOKIE['password']));
+        setcookie("root", "False/True");
+    } else
+    {
+        setcookie("root", "False/False");
+        $route = [
+            'controller' => 'index',
+            'action' => 'login'
+        ];
+    }
 }
 
 $controllers = [

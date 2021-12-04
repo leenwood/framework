@@ -44,10 +44,18 @@ class userData
 
     public function authBool($pAccount, $password)
     {
-        $sqlTmp = 'SELECT password FROM users WHERE uid=' . $pAccount . ';';
+        if(!isset($pAccount) or !isset($password) or ($password) == 'NULL' or $pAccount == 'NULL')
+        {
+            return False;
+        }
+        $sqlTmp = 'SELECT password FROM users WHERE uid = :uid LIMIT 1';
         $statement = $this->connection->prepare($sqlTmp);
+        $statement->execute([
+            "uid" => $pAccount
+        ]);
+        $retPas = $statement->fetch();
 
-        if($statement == $password)
+        if($retPas['password'] == $password)
         {
             return True;
         }
