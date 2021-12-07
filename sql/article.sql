@@ -38,3 +38,6 @@ ALTER TABLE counters add CONSTRAINT newStyleCodeRakaMakaFo_FK
     REFERENCES users(uid);
 
 INSERT INTO `users` (`uid`, `lastname`, `surname`, `password`, `homeSqueare`) VALUES (NULL, 'George', 'Ershov', '123', '8.32');
+INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('1', '1', 'GVS');
+INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('2', '1', 'HVS');
+INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('3', '1', 'ELE');

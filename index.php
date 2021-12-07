@@ -49,7 +49,6 @@ if($route['action'] == 'login' or $route['action'] == 'auth' or $route['action']
 {
     if($user->authBool($_COOKIE['pAccount'], $_COOKIE['password']))
     {
-        var_dump($user->authBool($_COOKIE['pAccount'], $_COOKIE['password']));
         setcookie("root", "False/True");
     } else
     {

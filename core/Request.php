@@ -4,7 +4,7 @@
  * Http Request class
  * Возращает значения POST, GET, COOKIE
  */
-class Request
+class Request extends userData
 {
     /**
      * Original GET Array
@@ -108,7 +108,16 @@ class Request
 
     public function getRequestParameter($name)
     {
-        return isset($this->originalPost[$name]) ? $this->originalPost[$name] : null;
+        return null;
     }
 
+    /***
+     * получение ИД счетчика из юзер даты
+     * @param $type
+     * @return int|mixed
+     */
+    public function getIdCounters($type)
+    {
+        return $this->getCountersId($type);
+    }
 }

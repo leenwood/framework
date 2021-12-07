@@ -32,7 +32,12 @@ class ArticleRepository
         return $statement->fetch();
     }
 
-    public function add($name, $body)
+    /***
+     * @param $name
+     * @param $body
+     * @param $idCount
+     */
+    public function add($name, $body, $idCount)
     {
         $statement = $this->connection->prepare("INSERT INTO counters (id, idCount, curValue, prevValue) ");
     }

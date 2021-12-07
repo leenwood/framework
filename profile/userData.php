@@ -36,10 +36,22 @@ class userData
         ];
     }
 
-    protected function checkCounter($type)
+    /***
+     * получаем ИД счетчика по его типу
+     * @param $type
+     * @return int|mixed
+     */
+    protected function getCountersId($type)
     {
-        $ansFromBD = "";
-        return $ansFromBD;
+        $sqlTmp = 'SELECT idCount FROM counters WHERE pAccount = :uid LIMIT 1 and typeCounters = :typeC LIMIT 1';
+        $statement = $this->connection->prepare($sqlTmp);
+        $statement->execute([
+            "uid" => $_COOKIE['pAccount'],
+            "typeC" => $type
+        ]);
+        $idCount = $statement->fetch();
+
+        return $idCount;
     }
 
     public function authBool($pAccount, $password)
