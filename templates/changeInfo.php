@@ -9,11 +9,11 @@
 <div class="authorization_div_main">
     <form action="/add" method="POST">
         <label>Смена данных о счетчике</label> <br>
-        <label for="GVScounters">Показания ГВС</label> <br>
+        <label for="GVScounter">Показания ГВС</label> <br>
         <input type="number" name="counters[GVS]"> <br>
-        <label for="HVScounters">Показания ХВС</label> <br>
+        <label for="HVScounter">Показания ХВС</label> <br>
         <input type="number" name="counters[HVS]"> <br>
-        <label for="ELEcounters">Показания Э/Э</label> <br>
+        <label for="ELEcounter">Показания Э/Э</label> <br>
         <input type="number" name="counters[ELE]"> <br>
         <br>
         <button class="btn btn-success" type="submit">Submit</button>

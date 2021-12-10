@@ -41,7 +41,7 @@ class userData
      * @param $type
      * @return int|mixed
      */
-    protected function getCountersId($type)
+    protected function getIdCountersUD($type)
     {
         $sqlTmp = 'SELECT idCount FROM counters WHERE pAccount = :uid LIMIT 1 and typeCounters = :typeC LIMIT 1';
         $statement = $this->connection->prepare($sqlTmp);
@@ -54,6 +54,38 @@ class userData
         return $idCount;
     }
 
+    /***
+     * возращает значение счетчика, последние
+     * @param $idCount
+     * @return mixed
+     */
+    public function getPrevValueCounterUD($idCount)
+    {
+        $currValue = 0;
+
+        $sqlTmp = 'SELECT currValue FROM indication WHERE idCount = :uid LIMIT 1';
+        $statement = $this->connection->prepare($sqlTmp);
+        $statement->execute([
+            "uid" => $idCount
+        ]);
+        $currValue = $statement->fetch();
+        return $currValue;
+    }
+
+    public function addInfoUD($idCount, $currValue, $prevValue)
+    {
+        $sqlTmp = 'INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`) VALUES (NULL, '.$idCount.', '.$currValue.', '.$prevValue.')';
+        $statement = $this->connection->prepare($sqlTmp);
+        $statement->execute();
+        return 0;
+    }
+
+    /***
+     * функция авторизации, проверки
+     * @param $pAccount
+     * @param $password
+     * @return bool
+     */
     public function authBool($pAccount, $password)
     {
         if(!isset($pAccount) or !isset($password) or ($password) == 'NULL' or $pAccount == 'NULL')

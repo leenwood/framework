@@ -41,3 +41,4 @@ INSERT INTO `users` (`uid`, `lastname`, `surname`, `password`, `homeSqueare`) VA
 INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('1', '1', 'GVS');
 INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('2', '1', 'HVS');
 INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('3', '1', 'ELE');
+INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`) VALUES ('1', '2', '10', '20');

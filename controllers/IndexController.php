@@ -89,19 +89,23 @@ class IndexController extends BaseController
     }
 
     public function addAction(Request $request) {
-        if ($request->isPost() && !empty($request->getRequestParameter('counters')))
+        if ($request->isPost() && !empty($request->getCountersValueBool()))
         {
-            $counters = $request->getRequestParameter('counters');
-            foreach ($counters as $key => $value)
-            {
-                /* механизм получения id счетчика из информации авторизованного пользовеля*/
-                $this->articleRepository->add();
-            }
-            /* Тут надо указать все перменные из метода POST котор https://i.imgur.com/muDUqbY.png ые будут добавлятся в sql
-             В данный момент. 1) 3 Счётчтчика ГВС ХВС, ЕЛЕ ,
-            которые указывают инфолрмацию ввиде простого числа.
-            2) Перебрать через цикл foreach, и отправить по отдельности их.
-            3) Информацию о типе счетчика хранится в таблице counters*/
+            $counterHVSid = $request->getIdCounters("HVS");
+            $counterGVSid = $request->getIdCounters("GVS");
+            $counterELEid = $request->getIdCounters("ELE");
+
+            $newValueGVS = $request->getValueCounter("GVScounter");
+            $newValueHVS = $request->getValueCounter("HVScounter");
+            $newValueELE = $request->getValueCounter("ELEcounter");
+
+            $prevValueGVS = $request->getPrevValueCounter($counterGVSid);
+            $prevValueHVS = $request->getPrevValueCounter($counterHVSid);
+            $prevValueELE = $request->getPrevValueCounter($counterELEid);
+
+            $request->addInfo($counterHVSid, $newValueHVS, $prevValueHVS);
+            $request->addInfo($counterGVSid, $newValueGVS, $prevValueGVS);
+            $request->addInfo($counterELEid, $newValueELE, $prevValueELE);
         }
         return new Response('/', '301', 'homePage');
     }
