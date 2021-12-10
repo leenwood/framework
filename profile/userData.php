@@ -43,11 +43,20 @@ class userData
      */
     protected function getIdCountersUD($type)
     {
-       ### $sqlTmp = 'SELECT idCount FROM counters WHERE pAccount = :uid LIMIT 1 and typeCounters = "'. $type . '"';
-        $sqlTmp = 'SELECT idCount FROM counters WHERE pAccount = 1 and typeCounters = "HVS"';
+        /*
+        $sqlTmp = 'SELECT password FROM users WHERE uid = :uid LIMIT 1';
         $statement = $this->connection->prepare($sqlTmp);
         $statement->execute([
-            "uid" => $_COOKIE['pAccount']
+            "uid" => $pAccount
+        ]);
+        $retPas = $statement->fetch();
+         */
+       ### $sqlTmp = 'SELECT idCount FROM counters WHERE pAccount = :uid LIMIT 1 and typeCounters = "'. $type . '"';
+        $sqlTmp = 'SELECT idCount FROM counters WHERE pAccount = 1 and typeCounters = "HVS"';
+        $pAccount = $_COOKIE['pAccount'];
+        $statement = $this->connection->prepare($sqlTmp);
+        $statement->execute([
+            "uid" => $pAccount
         ]);
         $idCount = $statement->fetch();
 
