@@ -43,11 +43,11 @@ class userData
      */
     protected function getIdCountersUD($type)
     {
-        $sqlTmp = 'SELECT idCount FROM counters WHERE pAccount = :uid LIMIT 1 and typeCounters = :typeC LIMIT 1';
+       ### $sqlTmp = 'SELECT idCount FROM counters WHERE pAccount = :uid LIMIT 1 and typeCounters = "'. $type . '"';
+        $sqlTmp = 'SELECT idCount FROM counters WHERE pAccount = 1 and typeCounters = "HVS"';
         $statement = $this->connection->prepare($sqlTmp);
         $statement->execute([
-            "uid" => $_COOKIE['pAccount'],
-            "typeC" => $type
+            "uid" => $_COOKIE['pAccount']
         ]);
         $idCount = $statement->fetch();
 
@@ -72,11 +72,19 @@ class userData
         return $currValue;
     }
 
+    /***
+     * Добавление информации в бд
+     * @param $idCount
+     * @param $currValue
+     * @param $prevValue
+     * @return int
+     */
     public function addInfoUD($idCount, $currValue, $prevValue)
     {
-        $sqlTmp = 'INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`) VALUES (NULL, '.$idCount.', '.$currValue.', '.$prevValue.')';
+        $sqlTmp = sprintf("'INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`) VALUES (NULL, %s, %s, %s)", $idCount, $currValue, $prevValue);
         $statement = $this->connection->prepare($sqlTmp);
         $statement->execute();
+        echo("<script>console.log('php_array: ".$sqlTmp."');</script>");
         return 0;
     }
 

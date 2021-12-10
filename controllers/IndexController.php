@@ -89,7 +89,7 @@ class IndexController extends BaseController
     }
 
     public function addAction(Request $request) {
-        if ($request->isPost() && !empty($request->getCountersValueBool()))
+        if ($request->isPost() && !$request->getCountersValueBool())
         {
             $counterHVSid = $request->getIdCounters("HVS");
             $counterGVSid = $request->getIdCounters("GVS");
