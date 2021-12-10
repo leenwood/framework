@@ -89,23 +89,23 @@ class IndexController extends BaseController
     }
 
     public function addAction(Request $request) {
-        if ($request->isPost() && !$request->getCountersValueBool())
+        if ($request->isPost() && $request->getCountersValueBool())
         {
-            $counterHVSid = $request->getIdCounters("HVS");
-            $counterGVSid = $request->getIdCounters("GVS");
-            $counterELEid = $request->getIdCounters("ELE");
+            $counterGVSid = $this->articleRepository->getIdCountersUD("GVS");
+            $counterHVSid = $this->articleRepository->getIdCountersUD("HVS");
+            $counterELEid = $this->articleRepository->getIdCountersUD("ELE");
 
             $newValueGVS = $request->getValueCounter("GVScounter");
             $newValueHVS = $request->getValueCounter("HVScounter");
             $newValueELE = $request->getValueCounter("ELEcounter");
 
-            $prevValueGVS = $request->getPrevValueCounter($counterGVSid);
-            $prevValueHVS = $request->getPrevValueCounter($counterHVSid);
-            $prevValueELE = $request->getPrevValueCounter($counterELEid);
+            $prevValueGVS = $this->articleRepository->getPrevValueCounterUD($counterGVSid);
+            $prevValueHVS = $this->articleRepository->getPrevValueCounterUD($counterHVSid);
+            $prevValueELE = $this->articleRepository->getPrevValueCounterUD($counterELEid);
 
-            $request->addInfo($counterHVSid, $newValueHVS, $prevValueHVS);
-            $request->addInfo($counterGVSid, $newValueGVS, $prevValueGVS);
-            $request->addInfo($counterELEid, $newValueELE, $prevValueELE);
+            $this->articleRepository->addInfoUD($counterHVSid, $newValueHVS, $prevValueHVS[0]["curValue"]);
+            $this->articleRepository->addInfoUD($counterGVSid, $newValueGVS, $prevValueGVS[0]["curValue"]);
+            $this->articleRepository->addInfoUD($counterELEid, $newValueELE, $prevValueELE[0]["curValue"]);
         }
         return new Response('/', '301', 'homePage');
     }

@@ -40,7 +40,6 @@ try {
     ];
 }
 
-
 if($route['action'] == 'login' or $route['action'] == 'auth' or $route['action'] == 'registr')
 {
     setcookie("root", "true");

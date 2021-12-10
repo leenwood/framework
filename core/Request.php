@@ -113,11 +113,16 @@ class Request extends userData
      */
     public function getCountersValueBool()
     {
-        if (isset($this->originalGet["GVScounter"]) or isset($this->originalGet["HVScounter"]) or isset($this->originalGet["ELEcounter"]))
+        if (isset($this->originalPost["GVScounter"]) or isset($this->originalPost["HVScounter"]) or isset($this->originalPost["ELEcounter"]))
         {
             return true;
         }
         return false;
+    }
+
+    public function getQueryParameter($name)
+    {
+        return isset($this->originalGet[$name]) ? $this->originalGet[$name] : null;
     }
 
     /***
@@ -127,37 +132,6 @@ class Request extends userData
      */
     public function getValueCounter($nameCount)
     {
-        return $this->originalGet[$nameCount];
-    }
-
-    /***
-     * узнаем преведущие значение счетчика
-     * @param $idCount
-     * @return mixed
-     */
-    public function getPrevValueCounter($idCount)
-    {
-        return $this->getPrevValueCounterUD($idCount);
-    }
-
-    /***
-     * добавляем новую запись
-     * @param $idCount
-     * @param $currValue
-     * @param $prevValue
-     */
-    public function addInfo($idCount, $currValue, $prevValue)
-    {
-        return $this->addInfoUD($idCount, $currValue, $prevValue);
-    }
-
-    /***
-     * получение ИД счетчика из юзер даты
-     * @param $type
-     * @return int|mixed
-     */
-    public function getIdCounters($type)
-    {
-        return $this->getIdCountersUD($type);
+        return $this->originalPost[$nameCount];
     }
 }
