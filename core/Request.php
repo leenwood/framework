@@ -137,6 +137,6 @@ class Request extends userData
 
     public function getQueryParameterUser($name)
     {
-        return isset($this->originalGet[$name]) ? $this->originalGet[$name] : null;
+        return isset($this->originalPost[$name]) ? $this->originalPost[$name] : null;
     }
 }
