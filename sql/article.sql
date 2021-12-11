@@ -44,3 +44,8 @@ INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('3', '1',
 INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`) VALUES ('2', '2', '30', '10');
 
 ALTER TABLE users ADD COLUMN roots INT(5);
+
+INSERT INTO `users` (`uid`, `lastname`, `surname`, `password`, `homeSqueare`, `roots`) VALUES (NULL, 'George', 'Ershov', '123', '8.32', '2');
+INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES (NULL, '2', 'GVS');
+INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES (NULL, '2', 'HVS');
+INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES (NULL, '2', 'ELE');

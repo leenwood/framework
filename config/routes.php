@@ -42,4 +42,19 @@ $routes = [
         'controller' => 'index',
         'action' => 'add'
     ],
+    '/admin' =>
+    [
+        'controller' => 'admin',
+        'action' => 'adm'
+    ],
+    '/admin/create/user' =>
+    [
+        'controller' => 'admin',
+        'action' => 'createUserForm'
+    ],
+    '/admin/newUser' =>
+    [
+        'controller' => 'admin',
+        'action' => 'newUser'
+    ],
 ];

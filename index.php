@@ -8,9 +8,11 @@ require_once 'core/Router.php';
 require_once 'core/BaseController.php';
 
 require_once 'repositories/ArticleRepository.php';
+require_once 'repositories/AdminRootProfile.php';
 
 require_once 'controllers/IndexController.php';
 require_once 'controllers/HelloWorldController.php';
+require_once 'controllers/AdminController.php';
 
 include_once 'config/routes.php';
 include_once 'config/database.php';
@@ -29,6 +31,7 @@ $connection = new PDO( $dsn, $database['username'], $database['password'],
     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
 $articleRepository = new ArticleRepository($connection);
+$adminsRootProfile = new AdminRootProfile($connection);
 $user = new userData($connection);
 
 try {
@@ -60,6 +63,7 @@ if($route['action'] == 'login' or $route['action'] == 'auth' or $route['action']
 
 $controllers = [
     'index' => new IndexController($articleRepository),
+    'admin' => new AdminController($adminsRootProfile),
     'helloWorld' => new HelloWorldController(),
 ];
 

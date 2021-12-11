@@ -87,4 +87,5 @@ class ArticleRepository
         echo("<script>console.log('php_array: ".$sqlTmp."');</script>");
         return 0;
     }
+
 }

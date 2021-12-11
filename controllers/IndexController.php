@@ -63,12 +63,6 @@ class IndexController extends BaseController
     **/
     public function authAction(Request $request)
     {
-
-        $pAccount = sprintf("%s", $_POST['login']);
-        $password = sprintf("%s", $_POST['password']);
-
-        setcookie('pAccount', $pAccount);
-        setcookie('password', $password);
         return new Response('/', '301', 'homePage');
     }
 
@@ -109,4 +103,7 @@ class IndexController extends BaseController
         }
         return new Response('/', '301', 'homePage');
     }
+
+
+
 }
