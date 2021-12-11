@@ -79,6 +79,11 @@ class AdminRootProfile extends \PDO
         return $retPas;
     }
 
+    /***
+     * получить бзера по ид
+     * @param $id
+     * @return mixed
+     */
     public function getByIdUser($id)
     {
         $statement = $this->connection->prepare("SELECT * FROM users WHERE uid = :id LIMIT 1");
@@ -88,5 +93,37 @@ class AdminRootProfile extends \PDO
         ]);
 
         return $statement->fetch();
+    }
+
+    /***
+     * получить все счетчики
+     * @param $id
+     * @return array|false
+     */
+    public function takeCountersUser($id)
+    {
+        $statement = $this->connection->prepare("SELECT * FROM counters WHERE pAccount = :id");
+
+        $statement->execute([
+            "id" => $id
+        ]);
+
+        return $statement->fetchAll();
+    }
+
+    /***
+     * получаем все данные из бд по ид счетчика
+     * @param $id
+     * @return array|false
+     */
+    public function getByIdCounter($id)
+    {
+        $statement = $this->connection->prepare("SELECT * FROM indication WHERE idCount = :id");
+
+        $statement->execute([
+            "id" => $id
+        ]);
+
+        return $statement->fetchAll();
     }
 }

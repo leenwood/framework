@@ -70,10 +70,36 @@ class AdminController extends BaseController
             ]));
     }
 
+    public function showCounterAction(Request $request)
+    {
+        if ($this->adminProfile->adminAuth($_COOKIE["pAccount"]))
+        {
+            $id = $request->getQueryParameter("id");
+            $count = is_numeric($id) ? $this->adminProfile->getByIdCounter($id) : null;
+            if (!$count) {
+                return new Response('Page not found <br><a href="/admin">back to articles list</a>',
+                    '404', 'Not found');
+            }
+
+            return new Response(
+                $this->render('admin/counter', [
+                    'counter' => $count
+                ])
+            );
+        }
+        return new Response(
+            $this->render('main', [
+                'title' => 'Основная страница',
+                'text' => '',
+                'error' => 'Нет доступа к разделу'
+            ]));
+    }
+
+
     /***
      * одного пользователя по гет запросу
      * @param Request $request
-     * @return void
+     * @return Response
      */
     public function showOneUserAction(Request $request)
     {
@@ -85,10 +111,11 @@ class AdminController extends BaseController
                 return new Response('Page not found <br><a href="/admin">back to articles list</a>',
                     '404', 'Not found');
             }
-
+            $counters = $this->adminProfile->takeCountersUser($id);
             return new Response(
                 $this->render('admin/userAdminProfile', [
-                    'user' => $user
+                    'user' => $user,
+                    'counters' => $counters
                 ])
             );
         }

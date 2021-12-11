@@ -33,7 +33,7 @@
 
     <?php foreach ($users as $id => $user): ?>
         <tr>
-            <td><a href="/admin/user?id=<?php echo $id ?>"><?php echo $id ?></a></td>
+            <td><a href="/admin/user?id=<?php echo $user[0]?>"><?php echo $user[0] ?></a></td>
             <td><?php echo $user[1]?></a></td>
             <td><?php echo $user[2] ?></td>
             <td><?php echo $user[4] ?></td>

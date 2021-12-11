@@ -66,4 +66,8 @@ $routes = [
         'controller' => 'admin',
         'action' => 'showOneUser'
     ],
+    '/admin/counter' => [
+        'controller' => 'admin',
+        'action' => 'showCounter'
+    ],
 ];

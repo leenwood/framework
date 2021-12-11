@@ -26,18 +26,14 @@
 Таблица счетчиков:
 <table>
     <tr>
-        <td>ID</td>
-        <td>Name</td>
-        <td>Surname</td>
-        <td>HomeSquare</td>
+        <td>ID счетчика</td>
+        <td>Тип счетчика</td>
     </tr>
 
-    <?php foreach ($users as $id => $user): ?>
+    <?php foreach ($counters as $id => $counter): ?>
         <tr>
-            <td><a href="/admin/user?id=<?php echo $id ?>"><?php echo $id ?></a></td>
-            <td><?php echo $user[1]?></a></td>
-            <td><?php echo $user[2] ?></td>
-            <td><?php echo $user[4] ?></td>
+            <td><a href="/admin/counter?id=<?php echo $counter[0] ?>"><?php echo $counter[0] ?></a></td>
+            <td><?php echo $counter[2] ?></a></td>
         </tr>
     <?php endforeach; ?>
 </table>
