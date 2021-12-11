@@ -153,6 +153,55 @@ class AdminController extends BaseController
             ]));
     }
 
+    /**
+     * форма подтверждения изменений данных
+     * @param Request $request
+     * @return Response
+     */
+    public function changeCountersAction(Request $request)
+    {
+        if ($this->adminProfile->adminAuth($_COOKIE["pAccount"]))
+        {
+            $id = $request->getQueryParameter("id");
+            $user = is_numeric($id) ? $this->adminProfile->getByIdUser($id) : null;
+            if (!$user) {
+                return new Response('Page not found <br><a href="/admin">back to articles list</a>',
+                    '404', 'Not found');
+            }
+            return new Response(
+            $this->render('admin/changeCounterForm', [
+                'title' => 'Сменить информацию о счетчиках',
+                'text' => '',
+                'error' => '',
+                'id' => $id
+            ]));
+        }
+        return new Response(
+            $this->render('main', [
+                'title' => 'Основная страница',
+                'text' => '',
+                'error' => 'Нет доступа к разделу'
+            ]));
+    }
+
+    public function confirmChangeCountersAction(Request $request)
+    {
+
+        if ($this->adminProfile->adminAuth($_COOKIE["pAccount"]))
+        {
+            $id = $request->getQueryParameter("id");
+            $this->adminProfile->changeInfoCounters($id);
+            return new Response('/admin', '301', 'homePage');
+        }
+        return new Response(
+            $this->render('main', [
+                'title' => 'Основная страница',
+                'text' => '',
+                'error' => 'Нет доступа к разделу'
+            ]));
+    }
+
+
     /***
      * создание пользователя
      * @param Request $request

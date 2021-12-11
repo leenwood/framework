@@ -78,10 +78,10 @@ class ArticleRepository
      * @param $prevValue
      * @return int
      */
-    public function addInfoUD($idCount, $currValue, $prevValue)
+    public function addInfoUD($idCount, $currValue, $prevValue, $timeStamp)
     {
         #INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`) VALUES ('2', '2', '30', '10');
-        $sqlTmp = sprintf("INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`) VALUES (null, '%s', '%s', '%s')", (int)$idCount, floatval($currValue), floatval($prevValue));
+        $sqlTmp = sprintf("INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`, `datestamp`) VALUES (null, '%s', '%s', '%s', '%s')", (int)$idCount, floatval($currValue), floatval($prevValue), $timeStamp);
         $statement = $this->connection->prepare($sqlTmp);
         $statement->execute();
         echo("<script>console.log('php_array: ".$sqlTmp."');</script>");

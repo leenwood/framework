@@ -102,13 +102,31 @@ class AdminRootProfile extends \PDO
      */
     public function takeCountersUser($id)
     {
-        $statement = $this->connection->prepare("SELECT * FROM counters WHERE pAccount = :id");
+        $statement = $this->connection->prepare("SELECT * FROM counters WHERE pAccount = :id ORDER BY idCount DESC LIMIT 3");
 
         $statement->execute([
             "id" => $id
         ]);
 
         return $statement->fetchAll();
+    }
+
+    public function changeInfoCounters($id)
+    {
+//        INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('1', '1', 'GVS');
+//          INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('2', '1', 'HVS');
+//          INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('3', '1', 'ELE');
+        $pAccount = (int)$id;
+        $sql = sprintf("INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES (NULL, '%s', 'GVS')", $pAccount);
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        $sql = sprintf("INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES (NULL, '%s', 'HVS')", $pAccount);
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        $sql = sprintf("INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES (NULL, '%s', 'ELE')", $pAccount);
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return 0;
     }
 
     /***

@@ -16,6 +16,7 @@
     <?php endif; ?>
     <a href="/login" class="btn btn-primary">Авторизоваться</a> <br />
     <a href="/registr" class="btn btn-primary">Зарегистрироваться</a> <br />
+    <a href="/make/ticket" class="btn btn-primary">Сформировать квитанцию</a> <br />
     <a href="/addInfo/Form" class="btn btn-primary">Ввод данных</a> <br />
     <a href="/admin" class="btn btn-primary">Панель администратора</a> <br />
 </body>

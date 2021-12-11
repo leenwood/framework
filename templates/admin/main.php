@@ -11,7 +11,8 @@
 </head>
 <body>
 <p><?php echo $msg ?></p>
-<a href="/admin/create/user" class="btn btn-primary">Создать нового пользователя</a>
-<a href="/admin/users" class="btn btn-primary">Посмотреть всех пользователей</a>
+<a href="/" class="btn btn-primary">Домой</a> <br> <br> <br>
+<a href="/admin/create/user" class="btn btn-primary">Создать нового пользователя</a> <br> <br>
+<a href="/admin/users" class="btn btn-primary">Посмотреть всех пользователей</a> <br> <br>
 </body>
 <?php

@@ -42,6 +42,10 @@ $routes = [
         'controller' => 'index',
         'action' => 'add'
     ],
+    '/make/ticket' => [
+        'controller' => 'index',
+        'action' => 'createTicket'
+    ],
     '/admin' =>
     [
         'controller' => 'admin',
@@ -69,5 +73,13 @@ $routes = [
     '/admin/counter' => [
         'controller' => 'admin',
         'action' => 'showCounter'
+    ],
+    '/admin/change/user/counters' => [
+        'controller' => 'admin',
+        'action' => 'changeCounters'
+    ],
+    '/admin/change/user/counters/confirm' => [
+        'controller' => 'admin',
+        'action' => 'confirmChangeCounters'
     ],
 ];

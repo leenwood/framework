@@ -19,6 +19,7 @@
 </head>
 <body>
 <a href="/admin/users" class="btn btn-primary">back to articles list</a>
+<a href="/admin/change/user/counters?id=<?php echo $user[0] ?>" class="btn btn-cancel">Поменять информацию о счетчиках</a>
 <h1>Имя <?php echo $user[1] ?></h1>
 <p>Фамилия <?php echo $user[2] ?> </p>
 <p>Номер лицевого счета <span style="color: #400200; font-weight: bold; text-decoration: underline;"><?php echo $user[0] ?> </span></p>

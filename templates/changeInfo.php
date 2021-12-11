@@ -20,6 +20,8 @@
         <input type="number" name="HVScounter"> <br>
         <label for="ELEcounter">Показания Э/Э</label> <br>
         <input type="number" name="ELEcounter"> <br>
+        <label for="dateTime">Показания Э/Э</label> <br>
+        <input type="date" name="dateTime"> <br>
         <br>
         <button class="btn btn-success" type="submit">Submit</button>
         <button formaction="/" class="btn btn-danger btn_border" type="submit" name="changeInfo">Cancel</button>

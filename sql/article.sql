@@ -13,7 +13,8 @@ CREATE TABLE  IF NOT EXISTS users (
     lastname varchar (255) not null,
     surname varchar (255) not null,
     password varchar (255) not null,
-    homeSqueare decimal (10,2) not null
+    homeSqueare decimal (10,2) not null,
+    roots int(6) not null
     ) ENGINE=InnoDB;
 
 CREATE TABLE  IF NOT EXISTS counters (
@@ -26,7 +27,8 @@ CREATE TABLE  IF NOT EXISTS indication (
     id INT (11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     idCount int (6),
     curValue decimal(8,3) not null,
-    prevValue decimal(8,3) not null
+    prevValue decimal(8,3) not null,
+    datestamp date not null
     ) ENGINE=InnoDB;
 
 ALTER TABLE indication add CONSTRAINT indVcounters_FK

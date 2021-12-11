@@ -79,14 +79,24 @@ class IndexController extends BaseController
         ]));
     }
 
+    /***
+     * форма добавления информации о счетчиках
+     * @param Request $request
+     * @return Response
+     */
     public function addInfoAction(Request $request) {
         return new Response(
             $this->render('changeInfo', [
-            'title' => 'changeInfo page',
+            'title' => 'Показания счетчиков',
             'text' => ''
         ]));
     }
 
+    /***
+     * добавить информацию о счетчиках
+     * @param Request $request
+     * @return Response
+     */
     public function addAction(Request $request) {
         if ($request->isPost() && $request->getCountersValueBool())
         {
@@ -102,13 +112,21 @@ class IndexController extends BaseController
             $prevValueHVS = $this->articleRepository->getPrevValueCounterUD($counterHVSid);
             $prevValueELE = $this->articleRepository->getPrevValueCounterUD($counterELEid);
 
-            $this->articleRepository->addInfoUD($counterHVSid, $newValueHVS, $prevValueHVS[0]["curValue"]);
-            $this->articleRepository->addInfoUD($counterGVSid, $newValueGVS, $prevValueGVS[0]["curValue"]);
-            $this->articleRepository->addInfoUD($counterELEid, $newValueELE, $prevValueELE[0]["curValue"]);
+            $timeDate = $request->getValueCounter("dateTime");
+
+            $this->articleRepository->addInfoUD($counterHVSid, $newValueHVS, $prevValueHVS[0]["curValue"], $timeDate);
+            $this->articleRepository->addInfoUD($counterGVSid, $newValueGVS, $prevValueGVS[0]["curValue"], $timeDate);
+            $this->articleRepository->addInfoUD($counterELEid, $newValueELE, $prevValueELE[0]["curValue"], $timeDate);
         }
         return new Response('/', '301', 'homePage');
     }
 
-
-
+    public function createTicketAction()
+    {
+        return new Response(
+            $this->render('ticket', [
+                'title' => 'Квитанция',
+                'text' => ''
+            ]));
+    }
 }
