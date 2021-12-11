@@ -42,3 +42,5 @@ INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('1', '1',
 INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('2', '1', 'HVS');
 INSERT INTO `counters` (`idCount`, `pAccount`, `typeCounters`) VALUES ('3', '1', 'ELE');
 INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`) VALUES ('2', '2', '30', '10');
+
+ALTER TABLE users ADD COLUMN roots INT(5);

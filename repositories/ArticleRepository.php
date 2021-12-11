@@ -42,24 +42,6 @@ class ArticleRepository
         $statement = $this->connection->prepare("INSERT INTO counters (id, idCount, curValue, prevValue) ");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /***
      * получаем ИД счетчика по его типу
      * @param $type
@@ -81,7 +63,6 @@ class ArticleRepository
      */
     public function getPrevValueCounterUD($idCount)
     {
-        #"SELECT MAX(`id`) FROM indication WHERE idCount = "
         #  SELECT curValue FROM indication WHERE idCount = %s ORDER BY id DESC LIMIT 1
         $sqlTmp = sprintf("SELECT curValue FROM indication WHERE idCount = %s ORDER BY id DESC LIMIT 1", $idCount);
         $statement = $this->connection->prepare($sqlTmp);
@@ -100,7 +81,6 @@ class ArticleRepository
     public function addInfoUD($idCount, $currValue, $prevValue)
     {
         #INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`) VALUES ('2', '2', '30', '10');
-
         $sqlTmp = sprintf("INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`) VALUES (null, '%s', '%s', '%s')", (int)$idCount, floatval($currValue), floatval($prevValue));
         $statement = $this->connection->prepare($sqlTmp);
         $statement->execute();
