@@ -31,6 +31,22 @@ class BaseController
         );
     }
 
+    /**
+     * Проверка на нулевость
+     * @param $vars
+     * @return void
+     */
+    protected function isNulled($vars = []) {
+        foreach ($vars as $key => $var)
+        {
+            if(empty($var))
+            {
+                return False;
+            }
+        }
+        return True;
+    }
+
     public function __call($name, $arguments)
     {
         return new Response('Sorry but this action not found',

@@ -57,4 +57,13 @@ $routes = [
         'controller' => 'admin',
         'action' => 'newUser'
     ],
+    '/admin/users' =>
+    [
+        'controller' => 'admin',
+        'action' => 'showUsers'
+    ],
+    '/admin/user' => [
+        'controller' => 'admin',
+        'action' => 'showOneUser'
+    ],
 ];

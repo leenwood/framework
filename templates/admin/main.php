@@ -10,8 +10,8 @@
     </style>
 </head>
 <body>
-
-</body>
 <p><?php echo $msg ?></p>
 <a href="/admin/create/user" class="btn btn-primary">Создать нового пользователя</a>
+<a href="/admin/users" class="btn btn-primary">Посмотреть всех пользователей</a>
+</body>
 <?php

@@ -10,7 +10,7 @@
         .authorization_div_main{	max-width: 30%;	display: flex;	align-items: center;	justify-content: center;	border: 1px solid rgba(38, 38, 38, 0.2);	padding: 20px;	border-radius: 6px;	-webkit-box-shadow: 0px 0px 15px -1px rgba(34, 60, 80, 0.05) inset;	-moz-box-shadow: 0px 0px 15px -1px rgba(34, 60, 80, 0.05) inset;	box-shadow: 0px 0px 15px -1px rgba(34, 60, 80, 0.05) inset;}
         .authorization_input{	outline: none;}
         .btn_border {	border: 1px solid rgba(38, 38, 38, 0.2);	float: right;}.msg_form {	color: rgba(128, 0, 0, 1);;	padding: 2%;	text-align: center;	text-transform: uppercase;	background-color: rgba(222, 55, 55, 0.3);}
-        form label {	margin-bottom: 20px;	text-align: center;}.footer {	background-color: rgba(64, 64, 64, 0.6);	min-height: 30px;	display: block;	margin-top: auto;}
+        form label {	margin-bottom: 4px;	text-align: center;}.footer {	background-color: rgba(64, 64, 64, 0.6);	min-height: 30px;	display: block;	margin-top: auto;}
         .page {	overflow: hidden;	display: flex;	flex-direction: column;	min-height: 100vh;	width: 100%;}.header {	background-color: rgba(250, 250, 250, 1);	min-height: 50px;	display: block;	padding: 10px 20px;}
         .footer__content {	margin: 0 auto;	width: 60%;	padding: 10px 20px;	line-height: 1;}
         .main__page__content {	margin: 0 auto;	width: 70%;	border: 1px solid black;}
@@ -32,13 +32,13 @@
     <form action="/admin/newUser" method="POST">
         <label><?php echo $formName ?></label> <br>
         <label for="newUser[name]">Введите имя</label> <br>
-        <input type="text" name="newUsers[name]"> <br>
+        <input type="text" name="newUsers[name]"> <br> <br>
         <label for="newUser[surname]">Введите Фамилию</label> <br>
-        <input type="text" name="newUsers[surname]"> <br>
+        <input type="text" name="newUsers[surname]"> <br> <br>
         <label for="newUser[password]">Введите Пароль</label> <br>
-        <input type="text" name="newUsers[password]"> <br>
+        <input type="text" name="newUsers[password]"> <br> <br>
         <label for="newUser[homeSq]">Введите размер площади</label> <br>
-        <input type="text" name="newUsers[homeSq]"> <br>
+        <input type="text" name="newUsers[homeSq]"> <br> <br>
         <label for="newUser[roots]">Введите уровень доступа</label> <br>
         <input type="text" name="newUsers[roots]"> <br>
         <br>
