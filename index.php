@@ -22,8 +22,6 @@ include_once 'config/database.php';
 $router = new Router($routes);
 $request = Request::createFromGlobals();
 
-
-
 /** @var Response $database */
 $dsn = sprintf("mysql:host=%s;dbname=%s;charset=%s", $database['database_host'], $database['database_name'],  $database['charset']);
 /** @var PDO $connection */

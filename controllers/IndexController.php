@@ -105,8 +105,35 @@ class IndexController extends BaseController
             $counterELEid = $this->articleRepository->getIdCountersUD("ELE");
 
             $newValueGVS = $request->getValueCounter("GVScounter");
+            if(!is_numeric($newValueGVS) or $newValueGVS < 0)
+            {
+                return new Response(
+                    $this->render('main', [
+                        'title' => 'Основная страница',
+                        'text' => '',
+                        'error' => 'Показания счетчика GVS некорректны или меньше 0'
+                    ]));
+            }
             $newValueHVS = $request->getValueCounter("HVScounter");
+            if(!is_numeric($newValueHVS) or $newValueHVS < 0)
+            {
+                return new Response(
+                    $this->render('main', [
+                        'title' => 'Основная страница',
+                        'text' => '',
+                        'error' => 'Показания счетчика HVS некорректны или меньше 0'
+                    ]));
+            }
             $newValueELE = $request->getValueCounter("ELEcounter");
+            if(!is_numeric($newValueELE) or $newValueELE < 0)
+            {
+                return new Response(
+                    $this->render('main', [
+                        'title' => 'Основная страница',
+                        'text' => '',
+                        'error' => 'Показания счетчика ELE некорректны или меньше 0'
+                    ]));
+            }
 
             $prevValueGVS = $this->articleRepository->getPrevValueCounterUD($counterGVSid);
             $prevValueHVS = $this->articleRepository->getPrevValueCounterUD($counterHVSid);
@@ -123,10 +150,36 @@ class IndexController extends BaseController
 
     public function createTicketAction()
     {
+        $counterGVSid = $this->articleRepository->getIdCountersUD("GVS");
+        $counterHVSid = $this->articleRepository->getIdCountersUD("HVS");
+        $counterELEid = $this->articleRepository->getIdCountersUD("ELE");
+
+        $GVS = $this->articleRepository->getByIdCounter($counterGVSid);
+        $HVS = $this->articleRepository->getByIdCounter($counterHVSid);
+        $ELE = $this->articleRepository->getByIdCounter($counterELEid);
+
+        $values = [
+            '1' => [
+                'id' => $GVS[count($GVS) - 1]['idCount'],
+                'curValue' => $GVS[count($GVS) - 1]['curValue'],
+                'prevValue' => $GVS[count($GVS) - 1]['prevValue']
+            ],
+            '2' => [
+                'id' => $HVS[count($HVS) - 1]['idCount'],
+                'curValue' => $HVS[count($HVS) - 1]['curValue'],
+                'prevValue' => $HVS[count($HVS) - 1]['prevValue']
+            ],
+            '3' => [
+                'id' => $ELE[count($ELE) - 1]['idCount'],
+                'curValue' => $ELE[count($ELE) - 1]['curValue'],
+                'prevValue' => $ELE[count($ELE) - 1]['prevValue']
+            ],
+        ];
+
         return new Response(
             $this->render('ticket', [
                 'title' => 'Квитанция',
-                'text' => ''
+                'values' => $values
             ]));
     }
 }

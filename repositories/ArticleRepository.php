@@ -32,6 +32,17 @@ class ArticleRepository
         return $statement->fetch();
     }
 
+    public function getByIdCounter($id)
+    {
+        $statement = $this->connection->prepare("SELECT * FROM indication WHERE idCount = :id");
+
+        $statement->execute([
+            "id" => $id
+        ]);
+
+        return $statement->fetchAll();
+    }
+
     /***
      * @param $name
      * @param $body
@@ -49,7 +60,7 @@ class ArticleRepository
      */
     public function getIdCountersUD($type)
     {
-        $sqlTmp = sprintf('SELECT idCount FROM counters WHERE pAccount = %s and typeCounters = "%s"', $_COOKIE["pAccount"], $type);
+        $sqlTmp = sprintf('SELECT idCount FROM counters WHERE pAccount = %s and typeCounters = "%s" ORDER BY idCount DESC', $_COOKIE["pAccount"], $type);
         $statement = $this->connection->prepare($sqlTmp);
         $statement->execute();
         $idCount = $statement->fetch();

@@ -15,7 +15,7 @@
         {
             width: 60%;
         }
-    </style
+    </style>
 </head>
 <body>
 
