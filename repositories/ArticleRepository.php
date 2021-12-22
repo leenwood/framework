@@ -9,94 +9,56 @@ class ArticleRepository
         $this->connection = $connection;
     }
 
-    /**
-     * Return all Articles
-     */
     public function getAll()
     {
         $statement = $this->connection->query("SELECT * FROM articles");
         return $statement->fetchAll();
     }
 
-    /**
-     * Return Article by ID
-     */
     public function getById($id)
     {
         $statement = $this->connection->prepare("SELECT * FROM articles WHERE id = :id LIMIT 1");
-
-        $statement->execute([
-            "id" => $id
-        ]);
-
+        $statement->execute(['id' => $id]);
         return $statement->fetch();
     }
 
     public function getByIdCounter($id)
     {
         $statement = $this->connection->prepare("SELECT * FROM indication WHERE idCount = :id");
-
-        $statement->execute([
-            "id" => $id
-        ]);
-
+        $statement->execute(['id' => $id]);
         return $statement->fetchAll();
     }
 
-    /***
-     * @param $name
-     * @param $body
-     * @param $idCount
-     */
-    public function add($name, $body, $idCount)
+    public function getIdCountersUD($type, $pAccount)
     {
-        $statement = $this->connection->prepare("INSERT INTO counters (id, idCount, curValue, prevValue) ");
+        $statement = $this->connection->prepare(
+            'SELECT idCount FROM counters WHERE pAccount = :pAccount AND typeCounters = :type ORDER BY idCount DESC LIMIT 1'
+        );
+        $statement->execute(['pAccount' => $pAccount, 'type' => $type]);
+        $row = $statement->fetch();
+        return $row ? $row['idCount'] : null;
     }
 
-    /***
-     * получаем ИД счетчика по его типу
-     * @param $type
-     * @return int|mixed
-     */
-    public function getIdCountersUD($type)
-    {
-        $sqlTmp = sprintf('SELECT idCount FROM counters WHERE pAccount = %s and typeCounters = "%s" ORDER BY idCount DESC', $_COOKIE["pAccount"], $type);
-        $statement = $this->connection->prepare($sqlTmp);
-        $statement->execute();
-        $idCount = $statement->fetch();
-        return $idCount['idCount'];
-    }
-
-    /***
-     * возращает значение счетчика, последние
-     * @param $idCount
-     * @return mixed
-     */
     public function getPrevValueCounterUD($idCount)
     {
-        #  SELECT curValue FROM indication WHERE idCount = %s ORDER BY id DESC LIMIT 1
-        $sqlTmp = sprintf("SELECT curValue FROM indication WHERE idCount = %s ORDER BY id DESC LIMIT 1", $idCount);
-        $statement = $this->connection->prepare($sqlTmp);
-        $statement->execute();
-        $retPas = $statement->fetchAll();
-        return $retPas;
+        $statement = $this->connection->prepare(
+            "SELECT curValue FROM indication WHERE idCount = :idCount ORDER BY id DESC LIMIT 1"
+        );
+        $statement->execute(['idCount' => $idCount]);
+        return $statement->fetchAll();
     }
 
-    /***
-     * Добавление информации в бд
-     * @param $idCount
-     * @param $currValue
-     * @param $prevValue
-     * @return int
-     */
     public function addInfoUD($idCount, $currValue, $prevValue, $timeStamp)
     {
-        #INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`) VALUES ('2', '2', '30', '10');
-        $sqlTmp = sprintf("INSERT INTO `indication` (`id`, `idCount`, `curValue`, `prevValue`, `datestamp`) VALUES (null, '%s', '%s', '%s', '%s')", (int)$idCount, floatval($currValue), floatval($prevValue), $timeStamp);
-        $statement = $this->connection->prepare($sqlTmp);
-        $statement->execute();
-        echo("<script>console.log('php_array: ".$sqlTmp."');</script>");
+        $statement = $this->connection->prepare(
+            "INSERT INTO indication (id, idCount, curValue, prevValue, datestamp) VALUES (null, :idCount, :curValue, :prevValue, :datestamp)"
+        );
+        $statement->execute([
+            'idCount'   => (int) $idCount,
+            'curValue'  => (float) $currValue,
+            'prevValue' => (float) $prevValue,
+            'datestamp' => $timeStamp,
+        ]);
         return 0;
     }
-
 }

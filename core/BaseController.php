@@ -2,12 +2,6 @@
 
 class BaseController
 {
-    /**
-     * рендерит страницу по названию файла
-     * @param $templateName
-     * @param array $vars
-     * @return false|string
-     */
     protected function render($templateName, $vars = [])
     {
         ob_start();
@@ -18,38 +12,23 @@ class BaseController
         return $content;
     }
 
-    /**
-     * Редиректит на нужную странирцу по юрл
-     * @param $url
-     * @return Response
-     */
-    protected function redirect($url) {
-        return new Response(
-            $this->render('articles', [
-                'articles' => articles
-            ])
-        );
+    protected function redirect($url)
+    {
+        return new Response($url, '301', 'Moved Permanently');
     }
 
-    /**
-     * Проверка на нулевость
-     * @param $vars
-     * @return void
-     */
-    protected function isNulled($vars = []) {
-        foreach ($vars as $key => $var)
-        {
-            if(empty($var))
-            {
-                return False;
+    protected function isNulled($vars = [])
+    {
+        foreach ($vars as $var) {
+            if (empty($var)) {
+                return false;
             }
         }
-        return True;
+        return true;
     }
 
     public function __call($name, $arguments)
     {
-        return new Response('Sorry but this action not found',
-            '404', 'Not found');
+        return new Response('Sorry but this action not found', '404', 'Not found');
     }
 }

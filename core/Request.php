@@ -1,123 +1,49 @@
 <?php
 
-/**
- * Http Request class
- * Возращает значения POST, GET, COOKIE
- */
-class Request extends userData
+class Request
 {
-    /**
-     * Original GET Array
-     * @var array
-     */
-    protected $originalGet = [];
-
-    /**
-     * Original POST array
-     * @var array
-     */
-    protected $originalPost = [];
-
-    /**
-     * Original Server arr
-     * @var array
-     */
+    protected $originalGet    = [];
+    protected $originalPost   = [];
     protected $originalServer = [];
+    protected $originalCookie = [];
 
-
-    /**
-     * Method type
-     * @var null|string
-     */
     protected $method = null;
+    protected $path   = '/';
 
-    /**
-     * URL Path
-     * @var string
-     */
-    protected $path = '/';
-
-
-    /**
-     * Create request object from Get and Post arrays
-     * @param array $get
-     * @param array $post
-     */
-    public function __construct($get, $post, $server)
+    public function __construct($get, $post, $server, $cookie = [])
     {
-        $this->originalGet = $get;
-        $this->originalPost = $post;
+        $this->originalGet    = $get;
+        $this->originalPost   = $post;
         $this->originalServer = $server;
+        $this->originalCookie = $cookie;
 
         $this->method = $server['REQUEST_METHOD'];
-        $this->path = $server['PATH_INFO'];
+        $this->path   = isset($server['PATH_INFO']) ? $server['PATH_INFO'] : '/';
     }
 
-
-
-
-    /**
-     * Create Request from global vars _GET _POST
-     * @return Request
-     */
-    public static function createFromGlobals() {
-        return new self($_GET, $_POST, $_SERVER);
+    public static function createFromGlobals()
+    {
+        return new self($_GET, $_POST, $_SERVER, $_COOKIE);
     }
 
-    /**
-     * Return true if method is GET
-     * @return bool
-     */
-    public function isGet() {
+    public function isGet()
+    {
         return $this->method === 'GET';
     }
 
-    /**
-     * Return true if method is POST
-     * @return bool
-     */
-    public function isPost() {
+    public function isPost()
+    {
         return $this->method === 'POST';
     }
 
-    /**
-     * Return request method
-     * @return mixed|string|null
-     */
-    public function getMethod() {
+    public function getMethod()
+    {
         return $this->method;
     }
 
-    /**
-     * Return request path
-     * @return mixed|string
-     */
-    public function getPath() {
+    public function getPath()
+    {
         return $this->path;
-    }
-
-    /**
-     * Return get parameter by name
-     * @param $name
-     * @return mixed|null
-     */
-    public function getRequestParameter($name)
-    {
-        return isset($this->originalGet[$name]) ? $this->originalGet[$name] : null;
-    }
-
-    /***
-     * получаем информацию о счетчики, находят ли они в $POST
-     * @return true|false
-     *
-     */
-    public function getCountersValueBool()
-    {
-        if (isset($this->originalPost["GVScounter"]) or isset($this->originalPost["HVScounter"]) or isset($this->originalPost["ELEcounter"]))
-        {
-            return true;
-        }
-        return false;
     }
 
     public function getQueryParameter($name)
@@ -125,18 +51,25 @@ class Request extends userData
         return isset($this->originalGet[$name]) ? $this->originalGet[$name] : null;
     }
 
-    /***
-     * возращает значение по имени счетчика из метода POST
-     * @param $nameCount
-     * @return string
-     */
-    public function getValueCounter($nameCount)
-    {
-        return $this->originalPost[$nameCount];
-    }
-
-    public function getQueryParameterUser($name)
+    public function getPost($name)
     {
         return isset($this->originalPost[$name]) ? $this->originalPost[$name] : null;
+    }
+
+    public function getCookie($name)
+    {
+        return isset($this->originalCookie[$name]) ? $this->originalCookie[$name] : null;
+    }
+
+    public function getCountersValueBool()
+    {
+        return isset($this->originalPost['GVScounter'])
+            || isset($this->originalPost['HVScounter'])
+            || isset($this->originalPost['ELEcounter']);
+    }
+
+    public function getValueCounter($nameCount)
+    {
+        return $this->getPost($nameCount);
     }
 }
